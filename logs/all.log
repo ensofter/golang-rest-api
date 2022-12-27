@@ -1,0 +1,6 @@
+time="2022-12-27T17:49:42+03:00" level=info msg="Create router" func="main.main()" file="app.go:15"
+time="2022-12-27T17:49:42+03:00" level=info msg="register user new handler" func="main.main()" file="app.go:19"
+time="2022-12-27T17:53:17+03:00" level=info msg="Create router" func="main.main()" file="app.go:14"
+time="2022-12-27T17:53:17+03:00" level=info msg="register user new handler" func="main.main()" file="app.go:17"
+time="2022-12-27T17:53:17+03:00" level=info msg="start application" func="main.start()" file="app.go:26"
+time="2022-12-27T17:53:17+03:00" level=info msg="server is listening port 1234" func="main.start()" file="app.go:39"
