@@ -94,8 +94,22 @@ func (d *db) Update(ctx context.Context, user user.User) error {
 }
 
 func (d *db) Delete(ctx context.Context, id string) error {
-	//TODO implement me
-	panic("implement me")
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return fmt.Errorf("failed to conver user ID to ObjectID. ID=%s", id)
+	}
+	filter := bson.M{"_id": objectID}
+
+	result, err := d.collection.DeleteOne(ctx, filter)
+	if err != nil {
+		return fmt.Errorf("failed to execute delete query. error: %v", err)
+	}
+	if result.DeletedCount == 0 {
+		// ToDo ErrEntityNotFound
+		return fmt.Errorf("not found")
+	}
+
+	d.logger.Tracef("Delete %d documents", result.DeletedCount)
 }
 
 func NerStorage(database *mongo.Database, collection string, logger *logging.Logger) user.Storage {
