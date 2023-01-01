@@ -110,10 +110,10 @@ func (d *db) Delete(ctx context.Context, id string) error {
 	}
 
 	d.logger.Tracef("Delete %d documents", result.DeletedCount)
+	return nil
 }
 
-func NerStorage(database *mongo.Database, collection string, logger *logging.Logger) user.Storage {
-
+func NewStorage(database *mongo.Database, collection string, logger *logging.Logger) user.Storage {
 	return &db{
 		collection: database.Collection(collection),
 		logger:     logger,
