@@ -32,54 +32,8 @@ func main() {
 	}
 	storage := db.NewStorage(mongoDBClient, cfgMongo.Collection, logger)
 
-	user1 := user.User{
-		ID:           "",
-		Email:        "myemail@example.com",
-		Username:     "poopa",
-		PasswordHash: "loopa",
-	}
-
-	user1ID, err := storage.Create(context.Background(), user1)
-	if err != nil {
-		panic(err)
-	}
-	logger.Info(user1ID)
-
-	user2 := user.User{
-		ID:           "",
-		Email:        "amromashov@gmail.com",
-		Username:     "root",
-		PasswordHash: "pook",
-	}
-
-	user2ID, err := storage.Create(context.Background(), user2)
-	if err != nil {
-		panic(err)
-	}
-	logger.Info(user2ID)
-
-	user2Found, err := storage.FindOne(context.Background(), user2ID)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(user2Found)
-
-	user2Found.Email = "newemail@aaaa.com"
-	err = storage.Update(context.Background(), user2Found)
-	if err != nil {
-		panic(err)
-	}
-
-	err := storage.Delete(context.Background(), user2ID)
-	if err != nil {
-		panic(err)
-	}
-
-	_, err = storage.FindOne(context.Background(), user2ID)
-	if err != nil {
-		panic(err)
-	}
+	users, err := storage.FindAll(context.Background())
+	fmt.Println(users)
 
 	logger.Info("register user new handler")
 	handler := user.NewHandler(logger)
