@@ -31,10 +31,7 @@ func main() {
 		panic(err)
 	}
 	storage := db.NewStorage(mongoDBClient, cfgMongo.Collection, logger)
-
-	users, err := storage.FindAll(context.Background())
-	fmt.Println(users)
-
+	
 	logger.Info("register user new handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
