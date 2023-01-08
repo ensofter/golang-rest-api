@@ -2,6 +2,10 @@ package apperror
 
 import "encoding/json"
 
+var (
+	ErrNotFound = NewAppError(nil, "not found", "", "US-000003")
+)
+
 type AppError struct {
 	Err              error  `json:"-"`
 	Message          string `json:"message"`
